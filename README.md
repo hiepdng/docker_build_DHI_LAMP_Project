@@ -21,8 +21,8 @@ Files provided:
 - docker-compose.yml:
   - Used to create **httpd**, **mysql** and **php-fpm** containers.
   - Modify it if neccessary.
-- my.cnf:
-  An example of the my,cnf file for MySQL server.
+- my.cnf:  
+  An example of the my.cnf file for MySQL server.
 
 <br/>
 
