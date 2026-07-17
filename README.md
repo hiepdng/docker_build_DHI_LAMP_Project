@@ -2,15 +2,25 @@
 
 
 ### Introduction:
-This repository is used to create an MySQl server based on [MySQL Docker Hardened Image (DHI)](https://hub.docker.com/hardened-images/catalog/dhi/mysql)  
+This LAMP project using Docker Hardened Images:  
+  - Apache image: [dhi.io/httpd:2.4.68-debian13](https://hub.docker.com/hardened-images/catalog/dhi/httpd)  
+  - MySQL image: [dhi.io/mysql:lts-debian13](https://hub.docker.com/hardened-images/catalog/dhi/mysql)  
+  - PHP image: [dhi.io/php:8.5.8-debian13-fpm](https://hub.docker.com/hardened-images/catalog/dhi/php)
+
+<br/>
 
 Files provided:  
 - scripts.sh:
-  - Create mount directory on the host system
+  - Set up httpd.conf and httpd-ssl.conf for **httpd** server
+  - Set my.cnf, CA and server certificates for **mysql** server
+  - Set up php.ini for **php-fpm** server
+  - Create mount directories on the host system
 - Dockerfile:
-  - Used to create your own local image. Modify it if neccessary.
+  - Used to create your own local **httpd**, **mysql** and **php-fpm** images.
+  - Modify it if neccessary.
 - docker-compose.yml:
-  - Used to create the container. Modify it if neccessary.
+  - Used to create **httpd**, **mysql** and **php-fpm** containers.
+  - Modify it if neccessary.
 
 <br/>
 
