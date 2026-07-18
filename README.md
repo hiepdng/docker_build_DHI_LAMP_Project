@@ -11,13 +11,13 @@ This LAMP project using Docker Hardened Images:
 
 Files provided:  
 - scripts.sh:
-  - Set up httpd.conf and httpd-ssl.conf for **httpd** server
-  - Set my.cnf, CA and server certificates for **mysql** server
+  - Set up httpd.conf, httpd-ssl.conf, and SSL self-signed certificates for **httpd** server
+  - Set my.cnf, SSL CA and server certificates for **mysql** server
   - Set up php.ini for **php-fpm** server
   - Create mount directories on the host system
 - Dockerfiles: (Dockerfile_httpd, Dockerfile_mysql, Dockerfile_php-fpm)
   - Used to create your own local **httpd**, **mysql** and **php-fpm** images.
-  - Modify it if neccessary.
+  - Modify them if neccessary.
 - docker-compose.yml:
   - Used to create **httpd**, **mysql** and **php-fpm** containers.
   - Modify it if neccessary.
