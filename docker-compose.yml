@@ -1,0 +1,31 @@
+services:
+  httpd:
+    image: dhi.io/httpd:2.4.68-debian13
+    container_name: my-httpd
+    ports:
+      - "8080:8080"
+      - "443:443"
+    environment:
+      - HTTPD_PREFIX=/usr/local/apache2
+    volumes:
+      - /home/app/apache2/htdocs:/usr/local/apache2/htdocs:ro
+  db:
+    image: dhi.io/mysql:lts-debian13
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    command: mysqld
+    volumes:
+      - /home/app/mysql:/var/lib/mysql
+  php-fpm:
+    image: dhi.io/php:8.5.8-debian13-fpm
+    pull_policy: never                   # Require a custom image built first, step 2
+    container_name: my-php-fpm
+    restart: unless-stopped
+    working_dir: /var/www/htm
+    ports:
+      - "9000:9000"
+    environment:
+      - PHP_PREFIX=/opt/php-8.5
+    volumes:
+      - /home/app/php:/var/www/html:ro
