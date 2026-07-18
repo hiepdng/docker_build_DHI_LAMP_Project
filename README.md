@@ -15,7 +15,7 @@ Files provided:
   - Set my.cnf, CA and server certificates for **mysql** server
   - Set up php.ini for **php-fpm** server
   - Create mount directories on the host system
-- Dockerfile:
+- Dockerfiles: (Dockerfile_httpd, Dockerfile_mysql, Dockerfile_php-fpm)
   - Used to create your own local **httpd**, **mysql** and **php-fpm** images.
   - Modify it if neccessary.
 - docker-compose.yml:
@@ -28,17 +28,20 @@ Files provided:
 
 ### Step 1: Pre-configuration
 - Run the script.sh:  
-`$ sh script.sh`
+```
+sh script.sh
+```
 
 ### Step 2: Building a PHP-FPM image
-`$ docker build -t dhi.io/mysql:lts-debian13 .`   
-
-### Step 3: Runing a MySQL container
 ```
-$ docker run --name my-mysql \
-  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
-  -v /home/app/mysql:/var/lib/mysql \
-  -d dhi.io/mysql:lts-debian13 mysqld
+docker build -f Dockerfile_httpd -t dhi.io/httpd:2.4.68-debian13 . 
+docker build -f Dockerfile_mysql -t dhi.io/mysql:lts-debian13 .
+docker build -f Dockerfile_php-fpm -t dhi.io/php:8.5.8-debian13-fpm .
+```   
+
+### Step 3: Running httpd, mysql, php-fpm containers
+```
+docker compose up -d
 ```   
 or  
 ```
