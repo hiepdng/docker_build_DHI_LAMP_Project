@@ -1,24 +1,30 @@
 services:
   httpd:
-    image: dhi.io/httpd:2.4.68-debian13
-    container_name: my-httpd
+    build:
+      context: ./versions/${HTTPDVERSION}
+    image: "${PROJECT_NAME}-${HTTPDVERSION}"
+    container_name: "${PROJECT_NAME}-${HTTPDVERSION}"
     ports:
-      - "8080:8080"
-      - "443:443"
+      - "${HOST_UNSECURE_PORT}:8080"
+      - "${HOST_SECURE_PORT}:443"
     environment:
       - HTTPD_PREFIX=/usr/local/apache2
     volumes:
-      - /home/app/apache2/htdocs:/usr/local/apache2/htdocs:ro
+      - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
+      - ${SSL_CERT_DIR}:/etc/ssl/certs
+      - ${SSL_INTERNAL_CERT_DIR}:/usr/local/share/ca-certificates
+    command: sh ./myscript.sh 
   db:
-    image: dhi.io/mysql:lts-debian13
+    image:  "${PROJECT_NAME}-${MYSQLVERSION}"
+    container_name: "${PROJECT_NAME}-${MYSQLVERSION}"
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     command: mysqld
     volumes:
-      - /home/app/mysql:/var/lib/mysql
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql
   php-fpm:
-    image: dhi.io/php:8.5.8-debian13-fpm
+    image: "${PROJECT_NAME}-${PHP-FPMVERSION}"
     pull_policy: never                   # Require a custom image built first, step 2
     container_name: my-php-fpm
     restart: unless-stopped
