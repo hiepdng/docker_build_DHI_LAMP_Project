@@ -19,7 +19,7 @@
 #-----------------------------------------------------------------
 #
 # Mysql Guides: 
-3 https://hub.docker.com/hardened-images/catalog/dhi/mysql/guides
+# https://hub.docker.com/hardened-images/catalog/dhi/mysql/guides
 # $ mysql --help
 #  Will display all default settings
 # 
@@ -84,7 +84,7 @@ SERVERADMIN="you@example.com"
 # Define your Docker ID and Token as variables
 DHI_USER="your-docker-username"
 DHI_TOKEN="your-personal-access-token"
-DHI_hTTPD_IMAGE="dhi.io/httpd:2.4.68-debian13-dev" # Replace with your required image and tag
+DHI_H qTTPD_IMAGE="dhi.io/httpd:2.4.68-debian13-dev" # Replace with your required image and tag
 
 # Authenticate to the DHI registry
 echo "$DHI_TOKEN" | docker login dhi.io -u "$DHI_USER" --password-stdin
@@ -93,10 +93,10 @@ echo "$DHI_TOKEN" | docker login dhi.io -u "$DHI_USER" --password-stdin
 docker pull "$DHI_HTTPD_IMAGE"
 
 # Get files from the image
-docker create --name my_container "$DHI_HTTPD_IMAGE"
-docker cp my_container:/usr/local/apache2/conf/httpd.conf .
-docker cp my_container:/usr/local/apache2/conf/extra/httpd-ssl.conf .
-docker rm temp_container
+docker create --name my_httpd_container "$DHI_HTTPD_IMAGE"
+docker cp my_httpd_container:/usr/local/apache2/conf/httpd.conf .
+docker cp my_httpd_container:/usr/local/apache2/conf/extra/httpd-ssl.conf .
+docker rm my_httpd_container
 docker rmi "$DHI_HTTPD_IMAGE"
 
 # Modify the httpd.conf and httpd-ssl.conf to use SSL/HTTPS
@@ -156,9 +156,9 @@ DHI_PHP_IMAGE="dhi.io/php:8.5.8-debian13-dev" # Replace with your required image
 docker pull "$DHI_PHP_IMAGE"
 
 # Get files from the image
-docker create --name my_container "$DHI_PHP_IMAGE"
-docker cp my_container:/usr/local/etc/php/php.ini .
-docker rm my_container
+docker create --name my_php_container "$DHI_PHP_IMAGE"
+docker cp my_php_container:/usr/local/etc/php/php.ini .
+docker rm my_php_container
 docker rmi "$DHI_PHP_IMAGE"
 
 
