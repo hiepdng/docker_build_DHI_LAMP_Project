@@ -112,6 +112,12 @@ sed -i \
     -e "s/^ServerAdmin you@example.com/ServerAdmin ${SERVERADMIN}/" \
     httpd-ssl.conf
 
+# Create a self-signed SSL Certificate for testing purposes:
+# Will create server.key.secure, server.key and server.crt
+openssl genrsa -des3 -passout pass:YourPasswordHere -out server.key.secure 
+openssl rsa -in server.key.secure -passin pass:YourPasswordHere -out server.key # decrypted server.key, used for auto start web withour password
+openssl req -new -x509 -nodes -sha1 -days 365 -key server.key -out server.crt -extensions usr_cert  -subj '/C=US/ST=state/L=city/O=example/OU=Sale-Dept/CN=httpd-server.example.com/emailAddress=your@example.com'
+
 # Create mount directory on the host system
 mkdir -p /home/app/apache2/htdocs
 sudo chown -R 65532:65532 /home/app/apache2/
