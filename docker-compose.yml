@@ -4,34 +4,48 @@ services:
       context: ./versions/${HTTPDVERSION}
     image: "${PROJECT_NAME}-${HTTPDVERSION}"
     container_name: "${PROJECT_NAME}-${HTTPDVERSION}"
+    restart: always
     ports:
       - "${HOST_UNSECURE_PORT}:8080"
       - "${HOST_SECURE_PORT}:443"
     environment:
-      - HTTPD_PREFIX=/usr/local/apache2
+      - HTTPD_PREFIX: /usr/local/apache2
+      - HTTPD_VERSION: 2.4.68
+      - LD_LIBRARY_PATH: /usr/local/apr/lib:/usr/local/apr-util/lib
+      - PATH: /usr/local/apache2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
       - ${SSL_CERT_DIR}:/etc/ssl/certs
       - ${SSL_INTERNAL_CERT_DIR}:/usr/local/share/ca-certificates
     command: sh ./myscript.sh 
   db:
+    build:
+      context: ./versions/${MYSQLVERSION}
     image:  "${PROJECT_NAME}-${MYSQLVERSION}"
     container_name: "${PROJECT_NAME}-${MYSQLVERSION}"
     restart: always
+    ports:
+      - "${HOST_MYSQL_PORT}:3306"
+      - "${HOST_MYSQLX_PORT}:33060"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      - MYSQL_OPTIONS: ${MYSQL_OPTIONS}
     command: mysqld
-    volumes:
+    volumes:MYSQL_ROOT_PASSWORD_FILE
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
   php-fpm:
-    image: "${PROJECT_NAME}-${PHP-FPMVERSION}"
+    build:
+      context: ./versions/${PHPVERSION}
+    image: "${PROJECT_NAME}-${PHPVERSION}"
+    container_name: "${PROJECT_NAME}-${PHPVERSION}"
     pull_policy: never                   # Require a custom image built first, step 2
-    container_name: my-php-fpm
     restart: unless-stopped
-    working_dir: /var/www/htm
+    working_dir: /var/www/html
     ports:
-      - "9000:9000"
+      - "${HOST_PHP_PORT}:9000"
     environment:
-      - PHP_PREFIX=/opt/php-8.5
+      - PHP_INI_DIR: /usr/local/etc/php
+      - PHP_PREFIX: /opt/php-8.5
     volumes:
-      - /home/app/php:/var/www/html:ro
+      - ${DOCUMENT_ROOT}:/var/www/html:ro
