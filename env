@@ -1,0 +1,29 @@
+# Name of your container
+PROJECT_NAME=lamp
+
+# For HTTPD
+HTTPDVERSION=httpd:2.4.68-debian13
+DOCUMENT_ROOT=./htdocs
+SSL_CERT_DIR=./ssl_cert_dir
+SSL_INTERNAL_CERT_DIR=./ssl_internal_cert_dir
+SSL_CERT_FILE
+HOST_UNSECURE_PORT=80
+HOST_SECURE_PORT=443
+SERVERNAME="www.example.com"
+SERVERADMIN="you@example.com"
+CERT_SUBJ="/C=US/ST=state/L=city/O=example/OU=Sale-Dept/CN=httpd-server.example.com/emailAddress=your@example.com"
+
+
+# For Mysql
+MYSQLVERSION=mysql:lts-debian13
+MYSQL_DATA_DIR=./mysql_data
+HOST_MYSQL_PORT=3306
+HOST_MYSQLX_PORT=33060
+#MYSQL_ROOT_PASSWORD_FILE=
+MYSQL_ROOT_PASSWORD=my-secret-pw
+MYSQL_OPTIONS="--max-connections=50 --connect_timeout=30"
+
+# For PHP-FPM
+PHPVERSION=PHP:8.5.8-debian13-fpm
+HOST_PHP_PORT=9000
+
