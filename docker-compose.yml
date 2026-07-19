@@ -9,11 +9,11 @@ services:
       - "${HOST_UNSECURE_PORT}:8080"
       - "${HOST_SECURE_PORT}:443"
     environment:
-      - HTTPD_PREFIX: /usr/local/apache2
-      - HTTPD_VERSION: 2.4.68
-      - LD_LIBRARY_PATH: /usr/local/apr/lib:/usr/local/apr-util/lib
-      - PATH: /usr/local/apache2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      - SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+      - HTTPD_PREFIX=/usr/local/apache2
+      - HTTPD_VERSION=2.4.68
+      - LD_LIBRARY_PATH=/usr/local/apr/lib:/usr/local/apr-util/lib
+      - PATH=/usr/local/apache2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
       - ${SSL_CERT_DIR}:/etc/ssl/certs
@@ -29,8 +29,8 @@ services:
       - "${HOST_MYSQL_PORT}:3306"
       - "${HOST_MYSQLX_PORT}:33060"
     environment:
-      - MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      - MYSQL_OPTIONS: ${MYSQL_OPTIONS}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_OPTIONS=${MYSQL_OPTIONS}
     command: mysqld
     volumes:MYSQL_ROOT_PASSWORD_FILE
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
@@ -45,7 +45,7 @@ services:
     ports:
       - "${HOST_PHP_PORT}:9000"
     environment:
-      - PHP_INI_DIR: /usr/local/etc/php
-      - PHP_PREFIX: /opt/php-8.5
+      - PHP_INI_DIR=/usr/local/etc/php
+      - PHP_PREFIX=/opt/php-8.5
     volumes:
       - ${DOCUMENT_ROOT}:/var/www/html:ro
