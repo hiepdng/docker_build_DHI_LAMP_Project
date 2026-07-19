@@ -21,7 +21,6 @@ services:
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
       #- ${SSL_CERT_DIR}:/etc/ssl/certs
-      #- ${SSL_INTERNAL_CERT_DIR}:/usr/local/share/ca-certificates
   db:
     build:
       context: ./versions/${MYSQLVERSION}
