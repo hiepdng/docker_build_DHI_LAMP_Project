@@ -27,7 +27,7 @@ services:
     build:
       context: ./versions/${MYSQLVERSION}
       args:
-        - MYCONF=${MYCONF}
+        - MYCNF=${MYCNF}
     image:  "${PROJECT_NAME}-${MYSQLVERSION}"
     container_name: "${PROJECT_NAME}-mysql"
     restart: always
