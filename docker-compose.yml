@@ -24,6 +24,10 @@ services:
   db:
     build:
       context: ./versions/${MYSQLVERSION}
+      args:
+        - CERT_SUBJ=${CERT_SUBJ}
+        - SERVER_NAME=${SERVER_NAME}
+        - SERVER_ADMIN=${SERVER_ADMIN}
     image:  "${PROJECT_NAME}-${MYSQLVERSION}"
     container_name: "${PROJECT_NAME}-mysql"
     restart: always
