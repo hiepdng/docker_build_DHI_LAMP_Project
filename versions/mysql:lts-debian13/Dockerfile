@@ -11,9 +11,9 @@ RUN echo ${MYCNF} > /app/my.cnf
 FROM dhi.io/mysql:lts-debian13
 
 # Copy Certificate
-COPY --chown=65532:65532 ca.pem /etc/
-COPY --chown=65532:65532 server-cert.pem /etc/
-COPY --chown=65532:65532 --chmod=600 server-key.pem /etc/
+COPY --chown=65532:65532 mysql_certs/ca.pem /etc/
+COPY --chown=65532:65532 mysql_certs/server-cert.pem /etc/
+COPY --chown=65532:65532 --chmod=600 mysql_certs/server-key.pem /etc/
 
 # Copy my.cnf
 COPY  --from=builder --chown=65532:65532 /app/my.cnf /etc/my.cnf
