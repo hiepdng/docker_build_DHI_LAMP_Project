@@ -27,34 +27,16 @@ Files provided:
 <br/>
 
 ### Step 1: Pre-configuration
-- Run the script.sh:  
+- Create MySQL certificates:  
 ```
-sh script.sh
-```
-
-### Step 2: Building a PHP-FPM image
-```
-docker build -f Dockerfile_httpd -t dhi.io/httpd:2.4.68-debian13 . 
-docker build -f Dockerfile_mysql -t dhi.io/mysql:lts-debian13 .
-docker build -f Dockerfile_php-fpm -t dhi.io/php:8.5.8-debian13-fpm .
+sh mysql_certs.sh
 ```   
 
-### Step 3: Running httpd, mysql, php-fpm containers
+### Step 2: Running httpd, mysql, php-fpm containers
 ```
 docker compose up -d
-```   
-or  
 ```
--Setup Docker named volume: run once
-$ docker volume create --driver local \
-  --opt type=none \
-  --opt o=bind \
-  --opt device=/home/app/mysql \
-  mysql-data
 
--Run a container:
-$ docker compose up -d`  
-```
 <br/><br/>
 
 ### Testing Secure (SSL) MySQl connections:
