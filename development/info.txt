@@ -22,6 +22,8 @@ Ports: 8080/tcp
 Mysql Guides: 
   https://hub.docker.com/hardened-images/catalog/dhi/mysql/guides
 $ mysql --help
+$ mysqld --help --verbose
+$ mysqladmin variables -uroot -p
   Will display all default settings
  
 -Configuration file locations:
