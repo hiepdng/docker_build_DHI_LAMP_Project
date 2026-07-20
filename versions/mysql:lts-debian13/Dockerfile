@@ -10,10 +10,8 @@ RUN echo ${MYCNF} > /app/my.cnf
 # 2. Final Stage: Copy the compiled site into a minimal production image
 FROM dhi.io/mysql:lts-debian13
 
-# Copy Certificate
-COPY --chown=65532:65532 mysql_certs/ca.pem /etc/
-COPY --chown=65532:65532 mysql_certs/server-cert.pem /etc/
-COPY --chown=65532:65532 --chmod=600 mysql_certs/server-key.pem /etc/
+# Create certs directory
+RUN mkdir /opt/mysql/certs
 
 # Copy my.cnf
 COPY  --from=builder --chown=65532:65532 /app/my.cnf /etc/my.cnf
