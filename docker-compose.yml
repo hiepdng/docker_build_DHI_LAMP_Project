@@ -21,6 +21,8 @@ services:
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
       #- ${SSL_CERT_DIR}:/etc/ssl/certs
+    depends_on:
+      - php-fpm
   db:
     build:
       context: ./versions/${MYSQLVERSION}
