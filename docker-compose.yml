@@ -23,7 +23,7 @@ services:
       #- ${SSL_CERT_DIR}:/etc/ssl/certs
     depends_on:
       - php-fpm
-  db:
+  mysqld:
     build:
       context: ./versions/${MYSQLVERSION}
       args:
