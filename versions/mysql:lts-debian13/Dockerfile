@@ -3,7 +3,7 @@ FROM dhi.io/mysql:lts-debian13-dev AS builder
 
 WORKDIR /app
 ARG MYCNF
-RUN echo ${MYCNF} > /app/my.cnf
+RUN echo "${MYCNF}" > /app/my.cnf
 
 
 
