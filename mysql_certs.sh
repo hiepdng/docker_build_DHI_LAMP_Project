@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 ## Create the Certificate Authority (CA): 
 # Generate CA Private Key
 openssl genrsa 2048 > ca-key.pem
