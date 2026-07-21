@@ -24,8 +24,8 @@ RUN sed -i \
 RUN sed -i \
         -e "s/^ServerName www.example.com:443/ServerName ${SERVER_NAME}:443/" \
         -e "s/^ServerAdmin you@example.com/ServerAdmin ${SERVER_ADMIN}/" \
-        -e "s/^SSLCertificateFile.*/SSLCertificateFile /usr/local/apache2/conf/certs/server.crt/" \
-        -e "s/^SSLCertificateKeyFile.*/SSLCertificateKeyFile /usr/local/apache2/conf/certs/server.key/" \
+        -e "s/^SSLCertificateFile.*/SSLCertificateFile \/usr\/local\/apache2\/conf\/certs\/server.crt/" \
+        -e "s/^SSLCertificateKeyFile.*/SSLCertificateKeyFile \/usr\/local\/apache2\/conf/certs\/server.key/" \
     /usr/local/apache2/conf/extra/httpd-ssl.conf
 
 
