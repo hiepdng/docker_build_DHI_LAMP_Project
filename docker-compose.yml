@@ -21,7 +21,7 @@ services:
       - SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
-      #- ${SSL_CERT_DIR}:/etc/ssl/certs
+      - ${HTTPD_CERT_DIR}:/usr/local/apache2/conf/certs
     depends_on:
       - php-fpm
   mysqld:
@@ -42,7 +42,7 @@ services:
     command: mysqld
     volumes:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
-      - ${MYSQL_CERTS_DIR}:/opt/mysql/certs
+      - ${MYSQL_CERT_DIR}:/opt/mysql/certs
   php-fpm:
     build:
       context: ./versions/${PHPVERSION}
