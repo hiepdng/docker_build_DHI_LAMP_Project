@@ -3,7 +3,7 @@ services:
     build:
       context: ./versions/${HTTPDVERSION}
       args:
-        - CERT_SUBJ=${CERT_SUBJ}
+        - HTTPD_CERT_SUBJ=${HTTPD_CERT_SUBJ}
         - SERVER_NAME=${SERVER_NAME}
         - SERVER_ADMIN=${SERVER_ADMIN}
     image: "${PROJECT_NAME}-${HTTPDVERSION}"
