@@ -18,9 +18,9 @@ fi
 
 ### For HTTPD
 # Create a self-signed SSL Certificate for testing purposes:
-RUN openssl genrsa -des3 -passout pass:YourPasswordHere -out /certs/httpd/server.key.secure
-RUN openssl rsa -in /certs/httpd/server.key.secure -passin pass:YourPasswordHere -out /certs/httpd/server.key # decrypted server.key, used for auto start web withour password
-RUN openssl req -new -x509 -nodes -sha1 -days 365 -key /certs/httpd/server.key -out /certs/httpd/server.crt -extensions usr_cert  -subj "/C=US/ST=state/L=City/O=Organization/OU=Department/CN=server.example.com/emailAddress=you@example.com"
+openssl genrsa -des3 -passout pass:YourPasswordHere -out /certs/httpd/server.key.secure
+openssl rsa -in /certs/httpd/server.key.secure -passin pass:YourPasswordHere -out /certs/httpd/server.key # decrypted server.key, used for auto start web withour password
+openssl req -new -x509 -nodes -sha1 -days 365 -key /certs/httpd/server.key -out /certs/httpd/server.crt -extensions usr_cert  -subj "/C=US/ST=state/L=City/O=Organization/OU=Department/CN=server.example.com/emailAddress=you@example.com"
 
 
 ### For MySQL
