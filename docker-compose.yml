@@ -23,6 +23,8 @@ services:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
       - ${HTTPD_CERT_DIR}:/usr/local/apache2/conf/certs
       - ./log/httpd:/usr/local/apache2/logs
+      - ./etc/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./etc/httpd-ssl.conf:/usr/local/apache2/conf/extra/httpd-ssl.conf
     depends_on:
       - php-fpm
   mysqld:
