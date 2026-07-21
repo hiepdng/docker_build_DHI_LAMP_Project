@@ -12,11 +12,7 @@ RUN mkdir -p /usr/local/share/ca-certificates/
 RUN openssl genrsa -out /app/my-internal-ca.key 2048
 RUN openssl req -x509 -new -nodes -key /app/my-internal-ca.key -sha256 -days 1826 -out /usr/local/share/ca-certificates/my-internal-ca.crt  -subj ${CERT_SUBJ}
 
-# Create a self-signed SSL Certificate for testing purposes:
-RUN openssl genrsa -des3 -passout pass:YourPasswordHere -out /app/server.key.secure
-RUN openssl rsa -in /app/server.key.secure -passin pass:YourPasswordHere -out /app/server.key # decrypted server.key, used for auto start web withour password
-RUN openssl req -new -x509 -nodes -sha1 -days 365 -key /app/server.key -out /app/server.crt -extensions usr_cert  -subj ${CERT_SUBJ}
-
+# Modify httpd.conf file
 RUN sed -i \
         -e "s/^#\(Include .*httpd-ssl.conf\)/\1/" \
         -e "s/^#\(LoadModule .*mod_ssl.so\)/\1/" \
@@ -24,9 +20,12 @@ RUN sed -i \
         -e "s/^#ServerName www.example.com:80/ServerName ${SERVER_NAME}/" \
     /usr/local/apache2/conf/httpd.conf
 
+# Modify httpd-ssl.conf file
 RUN sed -i \
         -e "s/^ServerName www.example.com:443/ServerName ${SERVER_NAME}:443/" \
         -e "s/^ServerAdmin you@example.com/ServerAdmin ${SERVER_ADMIN}/" \
+        -e "s/^SSLCertificateFile.*/SSLCertificateFile /usr/local/apache2/conf/certs/server.crt/" \
+        -e "s/^SSLCertificateKeyFile.*/SSLCertificateKeyFile /usr/local/apache2/conf/certs/server.key/" \
     /usr/local/apache2/conf/extra/httpd-ssl.conf
 
 
@@ -42,10 +41,7 @@ RUN update-ca-certificates
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 USER 65532
-COPY --chown=65532:65532 --from=builder /usr/local/apache2/conf/httpd.conf /usr/local/apache2/conf/
-COPY --chown=65532:65532 --from=builder /app/server.crt /usr/local/apache2/conf/
-COPY --chown=65532:65532 --from=builder /app/server.key /usr/local/apache2/conf/
-COPY --chown=65532:65532 --from=builder /usr/local/apache2/conf/extra/httpd-ssl.conf /usr/local/apache2/conf/extra/
+RUN mkdir -p /usr/local/apache2/conf/certs
 
 EXPOSE 8080 443
 
