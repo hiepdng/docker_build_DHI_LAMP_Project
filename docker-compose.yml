@@ -22,7 +22,7 @@ services:
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
       - ${HTTPD_CERT_DIR}:/usr/local/apache2/conf/certs
-      - ${HTTPD_LOG_DIR}:/usr/local/apache2/logs
+      - log/httpd:/usr/local/apache2/logs
     depends_on:
       - php-fpm
   mysqld:
