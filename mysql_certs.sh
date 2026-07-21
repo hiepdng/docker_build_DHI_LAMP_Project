@@ -26,7 +26,7 @@ openssl req -new -x509 -nodes -sha1 -days 365 -key certs/httpd/server.key -out c
 ### For MySQL
 ## Create the Certificate Authority (CA): 
 # Generate CA Private Key
-openssl genrsa 2048 > mysql_certs/ca-key.pem
+openssl genrsa 2048 > certs/mysql/ca-key.pem
 
 # Generate CA Certificate
 openssl req -new -x509 -nodes -days 3650 -key certs/mysql/ca-key.pem -out certs/mysql/ca.pem -subj '/C=US/ST=state/L=city/O=Organization/OU=Department/CN=server.example.com/emailAddress=you@example.com'
