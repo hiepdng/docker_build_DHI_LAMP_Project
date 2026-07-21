@@ -5,22 +5,22 @@ which openssl || { echo 'openssl not found' ; echo Exit...; }
 
 ### Create certs/httpd directory
 if [ ! -d "certs/httpd" ]; then
-    echo "Create mysql_certs directory."
+    echo "Create certs/httpd directory."
     mkdir -p certs/httpd
 fi
 
 ### Create certs/mysql directory
 if [ ! -d "certs/mysql" ]; then
-    echo "Create mysql_certs directory."
+    echo "Create certs/mysql directory."
     mkdir -p certs/mysql
 fi
 
 
 ### For HTTPD
 # Create a self-signed SSL Certificate for testing purposes:
-openssl genrsa -des3 -passout pass:YourPasswordHere -out /certs/httpd/server.key.secure
-openssl rsa -in /certs/httpd/server.key.secure -passin pass:YourPasswordHere -out /certs/httpd/server.key # decrypted server.key, used for auto start web withour password
-openssl req -new -x509 -nodes -sha1 -days 365 -key /certs/httpd/server.key -out /certs/httpd/server.crt -extensions usr_cert  -subj "/C=US/ST=state/L=City/O=Organization/OU=Department/CN=server.example.com/emailAddress=you@example.com"
+openssl genrsa -des3 -passout pass:YourPasswordHere -out certs/httpd/server.key.secure
+openssl rsa -in certs/httpd/server.key.secure -passin pass:YourPasswordHere -out certs/httpd/server.key # decrypted server.key, used for auto start web withour password
+openssl req -new -x509 -nodes -sha1 -days 365 -key certs/httpd/server.key -out certs/httpd/server.crt -extensions usr_cert  -subj "/C=US/ST=state/L=City/O=Organization/OU=Department/CN=server.example.com/emailAddress=you@example.com"
 
 
 ### For MySQL
