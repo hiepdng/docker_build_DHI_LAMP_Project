@@ -42,6 +42,7 @@ ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 USER 65532
 RUN mkdir -p /usr/local/apache2/conf/certs
+COPY --from=builder /usr/local/apache2/conf/httpd.conf /usr/local/apache2/conf/
 COPY --from=builder /usr/local/apache2/conf/extra/httpd-ssl.conf /usr/local/apache2/conf/extra/
 
 EXPOSE 8080 443
