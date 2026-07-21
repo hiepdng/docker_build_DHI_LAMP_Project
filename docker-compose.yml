@@ -8,6 +8,7 @@ services:
         - SERVER_ADMIN=${SERVER_ADMIN}
     image: "${PROJECT_NAME}-${HTTPDVERSION}"
     container_name: "${PROJECT_NAME}-httpd"
+    user: "${UID}:${GID}"
     restart: always
     ports:
       - "${HOST_UNSECURE_PORT}:8080"
@@ -21,6 +22,7 @@ services:
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
       - ${HTTPD_CERT_DIR}:/usr/local/apache2/conf/certs
+      - ${HTTPD_LOG_DIR}:/usr/local/apache2/logs
     depends_on:
       - php-fpm
   mysqld:
