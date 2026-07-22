@@ -14,7 +14,8 @@ Files provided:
 ├── certs/  
 │   ├── httpd/  
 │   └── mysql/  
-├── docker-compose.yml  
+├── docker-compose.yml
+├── .env  
 ├── etc/  
 │   ├── httpd.conf  
 │   ├── httpd-ssl.conf  
