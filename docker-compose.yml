@@ -60,3 +60,4 @@ services:
       - PHP_PREFIX=/opt/php-8.5
     volumes:
       - ${DOCUMENT_ROOT}:/var/www/html:ro
+      - ./etc/php.ini:/opt/php-8.5/etc/php/php.ini
