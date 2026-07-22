@@ -41,6 +41,7 @@ sed -i \
 
 
 
+
 ### For MySQL -----------------------------------------------------------------
 if [ ! -d "certs/mysql" ]; then
     echo "Create certs/mysql directory."
@@ -66,6 +67,9 @@ openssl x509 -req -days 3650 -in certs/mysql/server-req.pem -CA certs/mysql/ca.p
 ### Create the Client Certificate:
 # Generate Client Private Key
 openssl req -newkey rsa:2048 -days 3650 -nodes -keyout certs/mysql/client-key.pem -out certs/mysql/client-req.pem -subj ${MYSQL_CLIENT_CERT_SUBJ}
+
+# Sign the Client Certificate with the CA
+openssl x509 -req -days 3650 -in certs/mysql/client-req.pem -CA certs/mysql/ca.pem -CAkey certs/mysql/ca-key.pem -set_serial 01 -out certs/mysql/client-cert.pem
 
 
 
@@ -99,5 +103,4 @@ sed -i \
         -e "s/^;\(opcache.validate_timestamps.*\)/;\1\nopcache.validate_timestamps = 0/" \
     ./etc/php.ini
 
-# Sign the Client Certificate with the CA
-openssl x509 -req -days 3650 -in certs/mysql/client-req.pem -CA certs/mysql/ca.pem -CAkey certs/mysql/ca-key.pem -set_serial 01 -out certs/mysql/client-cert.pem
+
