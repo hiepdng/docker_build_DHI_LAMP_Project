@@ -35,20 +35,22 @@ Files provided:
     └── php:8.5.8-debian13-fpm/  
         └── Dockerfile
 ```
-
-- scripts.sh:
-  - Set up httpd.conf, httpd-ssl.conf, and SSL self-signed certificates for **httpd** server
-  - Set my.cnf, SSL CA and server certificates for **mysql** server
-  - Set up php.ini for **php-fpm** server
-  - Create mount directories on the host system
-- Dockerfiles: (Dockerfile_httpd, Dockerfile_mysql, Dockerfile_php-fpm)
-  - Used to create your own local **httpd**, **mysql** and **php-fpm** images.
-  - Modify them if neccessary.
+- .env: Environment file
+- setup.sh:
+   - Generate SSL/TLS self-signed certificates for **httpd** server
+   - Modify httpd.conf and httpd-ssl.conf to work with SSL certificates 
+   - Generate SSL/TLS Certificates for **mysql** server
+   - Modify php.ini for **php-fpm** server  
 - docker-compose.yml:
-  - Used to create **httpd**, **mysql** and **php-fpm** containers.
-  - Modify it if neccessary.
-- my.cnf:  
-  An example of the my.cnf file for MySQL server.
+   - Used to create **httpd**, **mysql** and **php-fpm** containers.
+   - Modify it if neccessary.
+- ./etc/*:  
+   - All configuration files - **httpd.conf**, **httpd-ssl.conf**, **my.cnf**, and **php.ini** - are bound to the host system as bind mounts.
+   - Modify them if necessary.  
+- ./htdocs/index.php  
+   - An example **index.php** file  
+- ./mysql_data/  
+   - A directory containing mysql data  
 
 <br/>
 
@@ -57,11 +59,6 @@ Files provided:
 ```
 sh setup.sh
 ```
- The setup.sh script will
-   - Generate SSL/TLS self-signed certificates for **httpd** server
-   - Modify httpd.conf and httpd-ssl.conf to work with SSL certificates 
-   - Generate SSL/TLS Certificates for **mysql** server
-   - Modify php.ini for **php-fpm** server  
 
 ### Step 2: Running httpd, mysql, php-fpm containers
 ```
