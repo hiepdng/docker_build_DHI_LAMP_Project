@@ -1,8 +1,9 @@
 #!/usr/bin/bash
 
 ### Load variables from .env file
-export $(grep -v '^#' .env | xargs)
-
+set -o allexport
+source .env
+set +o allexport
 
 ### Check if openssl exists
 which openssl || { echo 'openssl not found' ; echo Exit...; }
