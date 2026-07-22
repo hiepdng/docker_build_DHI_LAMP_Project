@@ -30,8 +30,6 @@ services:
   mysqld:
     build:
       context: ./versions/${MYSQLVERSION}
-      args:
-        - MYCNF=${MYCNF}
     image:  "${PROJECT_NAME}-${MYSQLVERSION}"
     container_name: "${PROJECT_NAME}-mysql"
     user: "${UID}:${GID}"
@@ -46,6 +44,7 @@ services:
     volumes:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
       - ${MYSQL_CERT_DIR}:/opt/mysql/certs
+      - ./etc/my.cnf:/etc/my.cnf
   php-fpm:
     build:
       context: ./versions/${PHPVERSION}
