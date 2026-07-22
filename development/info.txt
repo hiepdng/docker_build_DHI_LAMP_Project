@@ -1,8 +1,13 @@
+The below is the information used to build the DHI LAMP Project
 
+
+#-----------------------------------------------------------------
 Httpd Guides:
 https://hub.docker.com/hardened-images/catalog/dhi/httpd/guides
 https://hub.docker.com/_/httpd
 https://httpd.apache.org/docs/2.4/ssl/ssl_faq.html
+
+Image info.:
 -Default:
   Entrypoint: httpd-foreground
   CMD: -
@@ -25,7 +30,8 @@ $ mysql --help
 $ mysqld --help --verbose
 $ mysqladmin variables -uroot -p
   Will display all default settings
- 
+
+Image info.:
 -Configuration file locations:
    /etc/my.cnf
    /etc/mysql/my.cnf
@@ -61,7 +67,8 @@ $ php --ini
   Loaded Configuration File:         "/opt/php-8.5/etc/php/php.ini"
   Scan for additional .ini files in: "/opt/php-8.5/etc/php/conf.d"
   Additional .ini files parsed:      (none)
- 
+
+Image info.:
 -Configuration file locations:
   /usr/local/etc/php/php.ini
   /opt/php-8.5/etc/php/php.ini
@@ -133,41 +140,16 @@ LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
 -Required enabled entries in httpd-ssl.conf
 -----
 <VirtualHost _default_:443>
-  DocumentRoot /usr/local/apache2/htdocs
-  ServerName www.example.com:443
-  ServerAdmin you@example.com
-  
-  <Directory /usr/local/apache2/htdocs>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-  </Directory>
-
-  # Proxy PHP requests to the PHP-FPM container
-  <FilesMatch \.php$>
-    SetHandler "proxy:fcgi://my-php-fpm:9000"
-  </FilesMatch>
+  ProxyPassMatch "^/(.*\.php(/.*)?)$" "fcgi://lamp-php-fpm:9000/var/www/html/$1" enablereuse=on
 </VirtualHost>
 
 <VirtualHost *:8080>
-  DocumentRoot /usr/local/apache2/htdocs
-  ServerName www.example.com:8080
-  ServerAdmin you@example.com
-  
-  <Directory /usr/local/apache2/htdocs>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-  </Directory>
-
-  # Proxy PHP requests to the PHP-FPM container
-  <FilesMatch \.php$>
-    SetHandler "proxy:fcgi://my-php-fpm:9000"
-  </FilesMatch>
+  ProxyPassMatch "^/(.*\.php(/.*)?)$" "fcgi://lamp-php-fpm:9000/var/www/html/$1" enablereuse=on
 </VirtualHost>
 -----
 
-
+Where: lamp-php-fpm is the the php-fpm container name
+        /var/www/html is the document path to read *.php file of the php-fpm container
 
 
 
