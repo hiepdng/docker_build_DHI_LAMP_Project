@@ -22,10 +22,13 @@ openssl req -new -x509 -nodes -sha1 -days 365 -key certs/httpd/server.key -out c
 
 # Modify httpd.conf and httpd-ssl.conf
 sed -i \
+    -e "s/^#ServerName www.example.com:80/ServerName ${SERVER_NAME}/" \
     -e "s/^#\(Include .*httpd-ssl.conf\)/\1/" \
     -e "s/^#\(LoadModule .*mod_ssl.so\)/\1/" \
     -e "s/^#\(LoadModule .*mod_socache_shmcb.so\)/\1/" \
-    -e "s/^#ServerName www.example.com:80/ServerName ${SERVER_NAME}/" \
+    -e "s/^#\(LoadModule .*mod_proxy.so\)/\1/" \
+    -e "s/^#\(LoadModule .*mod_proxy_fcgi.so\)/\1/" \
+    -e "s/DirectoryIndex index.html/DirectoryIndex index.php index.html/" \
     ./etc/httpd.conf
 
 # Modify httpd-ssl.conf file
