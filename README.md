@@ -10,6 +10,31 @@ This LAMP project using Docker Hardened Images:
 <br/>
 
 Files provided:  
+```
+├── certs/  
+│   ├── httpd/  
+│   └── mysql/  
+├── docker-compose.yml  
+├── etc/  
+│   ├── httpd.conf  
+│   ├── httpd-ssl.conf  
+│   ├── my.cnf  
+│   └── php.ini  
+├── htdocs/  
+│   └── index.php  
+├── log/  
+│   └── httpd/  
+├── mysql_data/  
+├── setup.sh  
+└── versions/  
+    ├── httpd:2.4.68-debian13/  
+    │   └── Dockerfile  
+    ├── mysql:lts-debian13/  
+    │   └── Dockerfile  
+    └── php:8.5.8-debian13-fpm/  
+        └── Dockerfile
+```
+
 - scripts.sh:
   - Set up httpd.conf, httpd-ssl.conf, and SSL self-signed certificates for **httpd** server
   - Set my.cnf, SSL CA and server certificates for **mysql** server
@@ -29,8 +54,13 @@ Files provided:
 ### Step 1: Pre-configuration
 - Create MySQL certificates:  
 ```
-sh mysql_certs.sh
-```   
+sh setup.sh
+```
+ The setup.sh script will
+   - Generate SSL/TLS self-signed certificates for **httpd** server
+   - Modify httpd.conf and httpd-ssl.conf to work with SSL certificates 
+   - Generate SSL/TLS Certificates for **mysql** server
+   - Modify php.ini for **php-fpm** server  
 
 ### Step 2: Running httpd, mysql, php-fpm containers
 ```
