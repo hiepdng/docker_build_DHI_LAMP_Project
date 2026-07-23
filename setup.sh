@@ -53,7 +53,7 @@ fi
 openssl genrsa 2048 > certs/mysql/ca-key.pem
 
 # Generate CA Certificate
-openssl req -new -x509 -nodes -days 3650 -key certs/mysql/ca-key.pem -out certs/mysql/ca.pem -subj ${MYSQL_SERVER_CERT_SUBJ}
+openssl req -new -x509 -nodes -days 3650 -key certs/mysql/ca-key.pem -out certs/mysql/ca.pem -subj ${MYSQL_CA_CERT_SUBJ}
 
 
 ### Create the Server Certificate:
