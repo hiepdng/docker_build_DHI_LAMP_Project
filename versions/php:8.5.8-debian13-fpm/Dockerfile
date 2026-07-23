@@ -14,7 +14,7 @@ RUN echo "extension=redis.so" > /opt/php-8.5/etc/php/conf.d/redis.ini
 ### 2. Final Stage: Copy the compiled site into a minimal production image
 FROM dhi.io/php:8.5.8-debian13-fpm
 
-USER: root
+USER root
 RUN mkdir -p /opt/mysql/certs
 
 USER 65532
