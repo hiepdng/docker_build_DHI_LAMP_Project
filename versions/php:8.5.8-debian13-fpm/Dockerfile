@@ -1,7 +1,10 @@
 ### 1. Build Stage: Use the DHI Debian dev image to install tools
 FROM dhi.io/php:8.5.8-debian13-dev AS builder
 
-## Install redis
+# create directory for mysql certificate
+RUN mkdir -p /opt/php/mysql_certs
+
+# Install redis
 RUN git clone https://github.com/phpredis/phpredis.git \
     && cd phpredis \
     && phpize \
@@ -10,19 +13,36 @@ RUN git clone https://github.com/phpredis/phpredis.git \
     && make install
 RUN echo "extension=redis.so" > /opt/php/etc/php/conf.d/redis.ini
 
-RUN mkdir -p /opt/php/mysql_certs
+# Install extensions
+RUN cd /opt/php/src/ext/mysqli && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/pdo && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/pdo_mysql && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/openssl && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/bz2 && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/mbstring && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/fileinfo && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/gd && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/zip && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/curl && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/sockets && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/uri && phpize && ./configure && make && install
+
 
 
 
 ### 2. Final Stage: Copy the compiled site into a minimal production image
 FROM dhi.io/php:8.5.8-debian13-fpm
 
-## Config redis
+COPY --from=builder /opt/php/mysql_certs /opt/php/mysql_certs
+
+## Copy all extensions above, including redis
 COPY --from=builder /opt/php/lib/php/extensions /opt/php/lib/php/extensions/
+
+## Config redis
 COPY --from=builder /opt/php/etc/php/conf.d/redis.ini /opt/php/etc/php/conf.d/redis.ini
 
-COPY --from=builder /opt/php/mysql_certs /opt/php/mysql_certs
 
 EXPOSE 9000
 
 ENTRYPOINT ["/opt/php-8.5/sbin/php-fpm"]
+
