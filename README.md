@@ -60,8 +60,9 @@ Files provided:
 sh setup.sh
 ```
 
-### Step 2: Running httpd, mysql, php-fpm containers
+### Step 2: Building httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers
 ```
+docker compose build --no-cache
 docker compose up -d
 ```
 
