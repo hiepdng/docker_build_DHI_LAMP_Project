@@ -15,7 +15,6 @@ RUN echo "extension=redis.so" > /opt/php/etc/php/conf.d/redis.ini
 
 # Install extensions
 RUN cd /opt/php/src/ext/mysqli && phpize && ./configure && make install
-RUN cd /opt/php/src/ext/pdo && phpize && ./configure && make install
 RUN cd /opt/php/src/ext/pdo_mysql && phpize && ./configure && make install
 RUN cd /opt/php/src/ext/sockets && phpize && ./configure && make install
 
