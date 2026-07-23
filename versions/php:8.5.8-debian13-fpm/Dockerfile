@@ -14,18 +14,18 @@ RUN git clone https://github.com/phpredis/phpredis.git \
 RUN echo "extension=redis.so" > /opt/php/etc/php/conf.d/redis.ini
 
 # Install extensions
-RUN cd /opt/php/src/ext/mysqli && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/pdo && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/pdo_mysql && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/openssl && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/bz2 && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/mbstring && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/fileinfo && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/gd && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/zip && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/curl && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/sockets && phpize && ./configure && make && install
-RUN cd /opt/php/src/ext/uri && phpize && ./configure && make && install
+RUN cd /opt/php/src/ext/mysqli && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/pdo && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/pdo_mysql && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/openssl && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/bz2 && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/mbstring && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/fileinfo && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/gd && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/zip && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/curl && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/sockets && phpize && ./configure && make install
+RUN cd /opt/php/src/ext/uri && phpize && ./configure && make install
 
 
 
