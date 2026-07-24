@@ -30,7 +30,7 @@ services:
       - php-fpm
     networks:
       custom_network:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 172.1.0.2
   mysqld:
     build:
       context: ./versions/${MYSQLVERSION}
@@ -51,7 +51,7 @@ services:
       - ./etc/my.cnf:/etc/my.cnf
     networks:
       custom_network:
-        ipv4_address: 172.20.0.3
+        ipv4_address: 172.1.0.3
   php-fpm:
     build:
       context: ./versions/${PHPVERSION}
@@ -73,10 +73,10 @@ services:
       - ./etc/php.ini:/opt/php/etc/php/php.ini
     networks:
       custom_network:
-        ipv4_address: 172.20.0.4
+        ipv4_address: 172.1.0.4
         
 networks:
   custom_network:
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 172.1.0.0/16
