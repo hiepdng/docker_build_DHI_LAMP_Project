@@ -8,6 +8,7 @@ services:
         - SERVER_ADMIN=${SERVER_ADMIN}
     image: "${PROJECT_NAME}-${HTTPDVERSION}"
     container_name: "${PROJECT_NAME}-httpd"
+    hostname: "httpd_server"
     user: "${UID}:${GID}"
     restart: always
     ports:
@@ -32,6 +33,7 @@ services:
       context: ./versions/${MYSQLVERSION}
     image:  "${PROJECT_NAME}-${MYSQLVERSION}"
     container_name: "${PROJECT_NAME}-mysql"
+    hostname: "mysql_server"
     user: "${UID}:${GID}"
     restart: always
     ports:
@@ -49,6 +51,7 @@ services:
       context: ./versions/${PHPVERSION}
     image: "${PROJECT_NAME}-${PHPVERSION}"
     container_name: "${PROJECT_NAME}-php-fpm"
+    hostname: "php-fpm_server"
     user: "${UID}:${GID}"
     pull_policy: never                   # Require a custom image built first, step 2
     restart: unless-stopped
