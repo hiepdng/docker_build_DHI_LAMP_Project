@@ -22,13 +22,15 @@ openssl req -new -x509 -nodes -sha1 -days 365 -key certs/httpd/server.key -out c
 
 # Modify httpd.conf and httpd-ssl.conf
 sed -i \
-    -e "s/^#ServerName www.example.com:80/ServerName ${SERVER_NAME}/" \
+    -e "s/^#*ServerName www.example.com:80/ServerName ${SERVER_NAME}/" \
     -e "s/^#\(Include .*httpd-ssl.conf\)/\1/" \
     -e "s/^#\(LoadModule .*mod_ssl.so\)/\1/" \
     -e "s/^#\(LoadModule .*mod_socache_shmcb.so\)/\1/" \
     -e "s/^#\(LoadModule .*mod_proxy.so\)/\1/" \
     -e "s/^#\(LoadModule .*mod_proxy_fcgi.so\)/\1/" \
     -e "s/DirectoryIndex index.html/DirectoryIndex index.php index.html/" \
+    -e "s/^#*EnableMMAP.*/EnableMMAP Off/" \
+    -e "s/^#*EnableSendfile.*/EnableSendfile Off/" \
     ./etc/httpd.conf
 
 # Modify httpd-ssl.conf file
@@ -77,7 +79,9 @@ openssl x509 -req -days 3650 -in certs/mysql/client-req.pem -CA certs/mysql/ca.p
 ### For PHP-FPM ---------------------------------------------------------------
 sed -i \
         -e "s/^;*disable_functions.*/disable_functions = exec,shell_exec,passthru,system,popen,proc_open/" \
-        -e "s/^;*opcache.enable=.*/opcache.enable = 0/" \
+        -e "s/^;*opcache.enable=.*/opcache.enable=1/" \
+        -e "s/^;*opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" \
+        -e "s/^;*opcache.validate_timestamps=.*/opcache.validate_timestamps=1/" \
     ./etc/php.ini
 
 
