@@ -22,7 +22,6 @@ services:
       - SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
     volumes:
       - ${DOCUMENT_ROOT}:/usr/local/apache2/htdocs:ro
-      - ${DOCUMENT_ROOT}/uploads:/usr/local/apache2/htdocs/uploads:rw
       - ${HTTPD_CERT_DIR}:/usr/local/apache2/conf/certs
       - ./log/httpd:/usr/local/apache2/logs
       - ./etc/httpd.conf:/usr/local/apache2/conf/httpd.conf
