@@ -3,9 +3,7 @@
 # and remove all images and network.
 #---------------------------------------------
 
-set -o allexport
-source .env
-set +o allexport
+export $(grep -v '^#' .env | xargs)
 
 # Stop and remove containers
 docker stop lamp-httpd lamp-mysql lamp-php-fpm
