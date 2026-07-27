@@ -63,13 +63,19 @@ Files provided:
 
 <br/>
 
-### Step 1: Pre-configuration
-- Create MySQL certificates:  
+### Step 1: Download the repository
 ```
-sh setup.sh
+get clone https://github.com/hiepdng/docker_build_DHI_LAMP_Project.git
 ```
 
-### Step 2: Building httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers
+### Step 2: Pre-configuration
+- Setting up: directories, certificates and configuration files 
+```
+cd docker_build_DHI_LAMP_Project
+bash setup.sh
+```
+
+### Step 3: Building httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers
 ```
 docker compose build --no-cache
 docker compose up -d
