@@ -4,8 +4,6 @@ FROM dhi.io/httpd:2.4.68-debian13-dev AS builder
 WORKDIR /app
 
 ARG HTTPD_CERT_SUBJ
-ARG SERVER_NAME
-ARG SERVER_ADMIN
 
 # Create CA Certificates
 RUN mkdir -p /usr/local/share/ca-certificates/
