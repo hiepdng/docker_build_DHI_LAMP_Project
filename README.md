@@ -65,7 +65,7 @@ Files provided:
 
 ### Step 1: Download the repository
 ```
-get clone https://github.com/hiepdng/docker_build_DHI_LAMP_Project.git
+git clone https://github.com/hiepdng/docker_build_DHI_LAMP_Project.git
 ```
 
 ### Step 2: Pre-configuration
