@@ -72,7 +72,7 @@ git clone https://github.com/hiepdng/docker_build_DHI_LAMP_Project.git
 - Setting up: directories, certificates and configuration files 
 ```
 cd docker_build_DHI_LAMP_Project
-bash setup.sh
+sh setup.sh
 ```
 
 ### Step 3: Building httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers
