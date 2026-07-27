@@ -4,8 +4,6 @@ services:
       context: ./versions/${HTTPDVERSION}
       args:
         - HTTPD_CERT_SUBJ=${HTTPD_CERT_SUBJ}
-        - SERVER_NAME=${SERVER_NAME}
-        - SERVER_ADMIN=${SERVER_ADMIN}
     image: "${PROJECT_NAME}-${HTTPDVERSION}"
     container_name: "${PROJECT_NAME}-httpd"
     hostname: "httpd_server"
