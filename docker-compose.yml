@@ -21,7 +21,7 @@ services:
     depends_on:
       - php-fpm
     networks:
-      custom_network:
+      lamp_network:
         ipv4_address: 172.1.0.2
   mysqld:
     build:
@@ -42,7 +42,7 @@ services:
       - ${MYSQL_CERT_DIR}:/opt/mysql/certs
       - ./etc/my.cnf:/etc/my.cnf
     networks:
-      custom_network:
+      lamp_network:
         ipv4_address: 172.1.0.3
   php-fpm:
     build:
@@ -60,11 +60,11 @@ services:
       - ${MYSQL_CERT_DIR}:/opt/php/mysql_certs
       - ./etc/php.ini:/opt/php/etc/php/php.ini
     networks:
-      custom_network:
+      lamp_network:
         ipv4_address: 172.1.0.4
         
 networks:
-  custom_network:
+  lamp_network:
     ipam:
       config:
         - subnet: 172.1.0.0/16
