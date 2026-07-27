@@ -13,7 +13,8 @@ Files provided:
 ```
 ├── certs/  
 │   ├── httpd/  
-│   └── mysql/  
+│   └── mysql/
+├── cleanup.sh  
 ├── docker-compose.yml
 ├── .env  
 ├── etc/  
@@ -21,8 +22,12 @@ Files provided:
 │   ├── httpd-ssl.conf  
 │   ├── my.cnf  
 │   └── php.ini  
-├── htdocs/  
-│   └── index.php  
+├── htdocs/
+│   ├── database.php  
+│   ├── index.php  
+│   ├── module_list.php  
+│   ├── upload.php  
+│   └── uploads/  
 ├── log/  
 │   └── httpd/  
 ├── mysql_data/  
@@ -35,21 +40,25 @@ Files provided:
     └── php:8.5.8-debian13-fpm/  
         └── Dockerfile
 ```
-- .env: Environment file
-- setup.sh:
+- **.env**: Environment file
+- **cleanup.sh**: a script to delete all project containers and images
+- **setup.sh**:
    - Generate SSL/TLS self-signed certificates for **httpd** server
    - Modify httpd.conf and httpd-ssl.conf to work with SSL certificates 
    - Generate SSL/TLS Certificates for **mysql** server
    - Modify php.ini for **php-fpm** server  
-- docker-compose.yml:
+- **docker-compose.yml**:
    - Used to create **httpd**, **mysql** and **php-fpm** containers.
    - Modify it if neccessary.
-- ./etc/*:  
+- **./etc/***:  
    - All configuration files - **httpd.conf**, **httpd-ssl.conf**, **my.cnf**, and **php.ini** - are bound to the host system as bind mounts.
    - Modify them if necessary.  
-- ./htdocs/index.php  
-   - An example **index.php** file  
-- ./mysql_data/  
+- **./htdocs**: Document root mounted directory
+   - **index.php**: An example **index.php** web page
+   - **database.php**: An example of database upload/insert/query web page
+   - **module_list.php**: List of all installed php modules page
+   - **upload.php**: An example of file upload web page
+- **./mysql_data/**  
    - A directory containing mysql data  
 
 <br/>
