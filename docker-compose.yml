@@ -59,7 +59,6 @@ services:
     container_name: "${PROJECT_NAME}-php-fpm"
     hostname: "php-fpm_server"
     user: "${UID}:${GID}"
-    pull_policy: never                   # Require a custom image built first, step 2
     restart: unless-stopped
     working_dir: /var/www/html
     ports:
