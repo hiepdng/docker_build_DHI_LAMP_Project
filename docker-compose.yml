@@ -31,6 +31,8 @@ services:
     hostname: "mysql_server"
     user: "${UID}:${GID}"
     restart: always
+    cap_add:
+      - SYS_NICE
     ports:
       - "${HOST_MYSQL_PORT}:3306"
       - "${HOST_MYSQLX_PORT}:33060"
