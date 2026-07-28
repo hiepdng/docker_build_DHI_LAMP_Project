@@ -51,6 +51,10 @@ if [ ! -d "certs/mysql" ]; then
     echo "Create certs/mysql directory."
     mkdir -p certs/mysql
 fi
+if [ ! -d "mysql_data" ]; then
+    echo "Create mysql_data directory."
+    mkdir -p mysql_data
+fi
 
 ## Create the Certificate Authority (CA): 
 # Generate CA Private Key
