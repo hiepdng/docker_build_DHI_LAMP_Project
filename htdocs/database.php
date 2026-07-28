@@ -200,7 +200,7 @@ try {
 
 <!-- Upload a file---------------------------------------------------------- -->
 <div class="container">
-    <h2>Import a File into a Database table</h2>
+    <h2>Import a Dataset into a Database table</h2>
     
     <!-- Display feedback to the user -->
     <?php if (!empty($message)): ?>
@@ -218,7 +218,7 @@ try {
 
 <!-- Table selection ------------------------------------------------------ -->
 <form action="<?php $table_name_select =  htmlspecialchars($_POST['alltables'])  ?>" method="POST">
-<label for="table-select"><h2>Choose a Table to Display:</h2></label>
+<label for="table-select"><h2>Choose a Dataset to Display:</h2></label>
 <select name="alltables" id="table-select">
   <option value="">--Please choose an option--</option>
   <?php foreach ($tables as $table): ?>
