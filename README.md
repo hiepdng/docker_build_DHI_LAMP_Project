@@ -103,6 +103,7 @@ sh cleanup.sh
 <img width="746" height="849" alt="2" src="https://github.com/user-attachments/assets/6908515f-063d-49b0-9754-3b6bc75e725e" />
 
 <br/>
+
 ### Some commands for maintenance:  
 ```
 docker compose restart
