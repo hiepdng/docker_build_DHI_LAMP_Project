@@ -83,85 +83,17 @@ docker compose up -d
 
 <br/><br/>
 
-### Testing Secure (SSL) MySQl connections:
-you will create two containers and make Mysql connections between them.
-```
--Create your own network;
-$ docker network create --subnet=172.1.0.0/16 mynet123
-$ docker network ls                                      # List all network
-$ docker netowrk inspect mynet123                        # Inspect network mynet123
-
-
--Create two containers (server and client) with their own ip addresses:
-$ docker run --name server \
-  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
-  --network mynet123  --ip 172.1.0.2 \
-  --hostname server.example.con \
-  --add-host "client.example.com client":172.1.0.3 \
-  -p 3306:3306 \
-  -d dhi.io/mysql:lts-debian13  mysqld
-
-$ docker run --name client \
-  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
-  --network mynet123  --ip 172.1.0.3 \
-  --hostname client.example.con \
-  --add-host "server.example.com server":172.1.0.2 \
-  -p 33060:33060 \
-  -d dhi.io/mysql:lts-debian13  mysqld
-
-
--From client container, make MySQL connections to server container:
-$ docker exec -it client mysql -h server -uroot -p
-mysql> status;
-
-
--Remove your network and containers
-$ docker network ls
-$ docker network rm mynet123       # Delete network mynet123
-$ docker rm -f server client       # Delete sever client containers
-```
-
-<br/><br/>
-
-### Some other docker MysQl commands:
-```
--Running the container
-$ docker run --name=my-mysql \
-  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
-  -d dhi.io/mysql:lts-debian13 mysqld
-
--Running the container with options
-$ docker run --name my-mysql \
-  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
-  -e MYSQL_OPTIONS="--max_connections=50 --connect_timeout=20" \
-  -d dhi.io/mysql:lts-debian13  mysqld
-
--Run container shell:
-$ docker exec -it <containerID> bash
-or
-$ docker run -it -e MYSQL_ROOT_PASSWORD=my-secret-pw  dhi.io/mysql:lts-debian13 bash
-
-$ docker run --rm -e MYSQL_ROOT_PASSWORD=my-secret-pw dhi.io/mysql:lts-debian13 mysql --help     # Show mysql options
-$ docker run --rm -e MYSQL_ROOT_PASSWORD=my-secret-pw dhi.io/mysql:lts-debian13 mysql --version  # show mysql version
-
-# Login mysql shell:
-$ docker exec -it <containerID> mysql -uroot -p
-$ docker exec -it <containerID> mysql -uroot -p -e "SHOW VARIABLES LIKE 'max_connections';"
-
-# Create a database:
-$ docker exec -it <containerID> mysql -uroot -p -e "CREATE DATABASE mydb;"
-
-# Create a user with privileges
-$ docker exec -it <containerID> mysql -uroot -p -e \
-  "CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword'; \
-   GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';"
-
-# Run sql scripts
-$ docker exec -i <containerID> mysql -uroot -pmy-secret-pw  < /path/to/init.sql
-
-```
+### Checking:
+To visit your page, to to https://localhost/index.php
 
 <br/>
+
+### Cleaup your LAMP Project:
+```
+sh cleanup.sh
+```
+<br/>
+
 
 ### Basic docker commands:
 ```
