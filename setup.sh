@@ -9,8 +9,8 @@ which openssl || { echo 'openssl not found' ; echo Exit...; }
 
 ### For HTTPD -----------------------------------------------------------------
 if [ ! -d "certs/httpd" ]; then
-    echo "Create certs/httpd directory."
-    mkdir -p certs/httpd
+    echo "Create ${HTTPD_CERT_DIR} directory."
+    mkdir -p ${HTTPD_CERT_DIR}
 fi
 if [ ! -d "htdocs/uploads" ]; then
     echo "Create htdocs/uploads directory."
@@ -48,12 +48,12 @@ sed -i \
 
 ### For MySQL -----------------------------------------------------------------
 if [ ! -d "certs/mysql" ]; then
-    echo "Create certs/mysql directory."
-    mkdir -p certs/mysql
+    echo "Create $[MYSQL_CERT_DIR} directory."
+    mkdir -p  $[MYSQL_CERT_DIR}
 fi
 if [ ! -d "mysql_data" ]; then
-    echo "Create mysql_data directory."
-    mkdir -p mysql_data
+    echo "Create ${MYSQL_DATA_DIR} directory."
+    mkdir -p ${MYSQL_DATA_DIR}
 fi
 
 ## Create the Certificate Authority (CA): 
