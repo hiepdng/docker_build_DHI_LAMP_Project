@@ -2,7 +2,9 @@
 
 
 ### Introduction:
-This LAMP project using Docker Hardened Images:  
+The LAMP stack project uses Docker Compose and hardened Docker images for high security. For testing, I enabled both unencrypted (port 80) and encrypted (port 443) traffic. To secure the web server, HTTPS must be enforced alongside other security configurations.
+
+For demonstration, the following docker images are used: 
   - Apache image: [dhi.io/httpd:2.4.68-debian13](https://hub.docker.com/hardened-images/catalog/dhi/httpd)  
   - MySQL image: [dhi.io/mysql:lts-debian13](https://hub.docker.com/hardened-images/catalog/dhi/mysql)  
   - PHP image: [dhi.io/php:8.5.8-debian13-fpm](https://hub.docker.com/hardened-images/catalog/dhi/php)
@@ -63,19 +65,20 @@ Files provided:
 
 <br/>
 
-### Step 1: Download the repository
+### Setup
+- #### Download the repository
 ```
 git clone https://github.com/hiepdng/docker_build_DHI_LAMP_Project.git
 ```
 
-### Step 2: Pre-configuration
-- Setting up: directories, certificates and configuration files 
+- #### Configure/setup environment
+  - This will set up directories, create certificates and modify configuration files 
 ```
 cd docker_build_DHI_LAMP_Project
 sh setup.sh
 ```
 
-### Step 3: Building httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers
+- #### Build httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers
 ```
 docker compose build --no-cache
 docker compose up -d
@@ -94,6 +97,21 @@ sh cleanup.sh
 ```
 <br/>
 
+### Webpage Samples:
+<img width="800" height="399" alt="1" src="https://github.com/user-attachments/assets/ef5d540b-7ab8-4e0c-81b6-e8d6c0dee77c" />
+
+<img width="746" height="849" alt="2" src="https://github.com/user-attachments/assets/6908515f-063d-49b0-9754-3b6bc75e725e" />
+
+<br/>
+### Some commands for maintenance:  
+```
+docker compose restart
+docker network ls
+docker compose exec httpd sh
+docker compose exec mysqld sh
+```
+
+<br/>
 
 ### Basic docker commands:
 ```
