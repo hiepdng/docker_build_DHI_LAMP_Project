@@ -200,7 +200,7 @@ try {
 
 <!-- Upload a file---------------------------------------------------------- -->
 <div class="container">
-    <h2>Import a Dataset into a Database table</h2>
+    <h2>Import a Dataset into a Database Table</h2>
     
     <!-- Display feedback to the user -->
     <?php if (!empty($message)): ?>
