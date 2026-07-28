@@ -80,6 +80,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['uploaded_file'])) {
     }
 }
 
+
+// Create database db1
+  try {
+    $conn->exec("CREATE DATABASE IF NOT EXISTS db1"); //Create database db1
+  }
+  catch (PDOException $e) {
+    die("Database Connection error: " . $e->getMessage());
+  }
+
+
 // Count number of columns ----------------------------------------------------
 if (file_exists($target_path)) {
   $handle = fopen($target_path, 'r');
