@@ -1,4 +1,4 @@
-name: Deploy via SSH
+name: LAMP deploy on remote server via SSH
 
 on:
   #push:
