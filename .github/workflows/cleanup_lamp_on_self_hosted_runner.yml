@@ -21,6 +21,7 @@ jobs:
               # Skip comments and empty lines
               [[ "$line" =~ ^#.*$ ]] || [ -z "$line" ] && continue
               echo "$line" >> $GITHUB_ENV
+              echo "$line"
             done < .env
           else
             echo ".env file not found"
