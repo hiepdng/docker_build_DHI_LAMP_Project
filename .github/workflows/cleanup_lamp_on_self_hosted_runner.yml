@@ -21,12 +21,15 @@ jobs:
               echo "$line" >> $GITHUB_ENV
           done < .env
           # Stop and remove containers
-          docker stop lamp-httpd lamp-mysql lamp-php-fpm
-          docker rm lamp-httpd lamp-mysql lamp-php-fpm
+          #docker stop lamp-httpd lamp-mysql lamp-php-fpm
+          3docker rm lamp-httpd lamp-mysql lamp-php-fpm
           # Remove images
-          docker rmi "${PROJECT_NAME}-${HTTPDVERSION}"
-          docker rmi "${PROJECT_NAME}-${MYSQLVERSION}"
-          docker rmi "${PROJECT_NAME}-${PHPVERSION}"
+          #docker rmi "${PROJECT_NAME}-${HTTPDVERSION}"
+          #docker rmi "${PROJECT_NAME}-${MYSQLVERSION}"
+          #docker rmi "${PROJECT_NAME}-${PHPVERSION}"
+          echo "${PROJECT_NAME}-${HTTPDVERSION}"
+          echo "${PROJECT_NAME}-${MYSQLVERSION}"
+          echo "${PROJECT_NAME}-${PHPVERSION}"
           # Remove docker network
           docker network ls --filter name=lamp_network -q |xargs -r docker network rm
 
