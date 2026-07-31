@@ -1,4 +1,4 @@
-name: Deploy to Local Machine
+name: Deploy lamp to Local Machine
 
 on:
   #push:
