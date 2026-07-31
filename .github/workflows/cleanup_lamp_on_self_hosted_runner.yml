@@ -18,8 +18,8 @@ jobs:
         run: |
           export $(grep -v '^#' .env | xargs)
           # Stop and remove containers
-          docker stop lamp-httpd lamp-mysql lamp-php-fpm
-          docker rm lamp-httpd lamp-mysql lamp-php-fpm
+          #docker stop lamp-httpd lamp-mysql lamp-php-fpm
+          #docker rm lamp-httpd lamp-mysql lamp-php-fpm
 
           # Remove images
           docker rmi "${PROJECT_NAME}-${HTTPDVERSION}"
