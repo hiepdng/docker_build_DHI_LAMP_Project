@@ -20,5 +20,12 @@ jobs:
       - name: Setup
         run: sh setup.sh
         
+      - name: Login to dhi.io Registry
+        uses: docker/login-action@v4
+        with:
+          registry: dhi.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
       - name: Deploy Docker Compose
         run: docker compose up -d --remove-orphans
