@@ -16,6 +16,7 @@ jobs:
 
       - name: Cleanup
         run: |
+          export $(grep -v '^#' .env | xargs)
           # Stop and remove containers
           docker stop lamp-httpd lamp-mysql lamp-php-fpm
           docker rm lamp-httpd lamp-mysql lamp-php-fpm
