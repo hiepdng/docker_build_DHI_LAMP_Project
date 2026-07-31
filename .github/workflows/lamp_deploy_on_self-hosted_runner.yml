@@ -1,0 +1,24 @@
+name: Deploy to Local Machine
+
+on:
+  #push:
+  workflow_dispatch: 
+    branches:
+      - main  # Trigger on push to main branch
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Executes directly on your local Linux machine
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Pull updated Docker images (optional)
+        run: docker compose pull
+
+      - name: Setup
+        run: sh setup.sh
+        
+      - name: Deploy Docker Compose
+        run: docker compose up -d --remove-orphans
