@@ -33,7 +33,7 @@ jobs:
           #docker rmi "${PROJECT_NAME}-${HTTPDVERSION}"
           #docker rmi "${PROJECT_NAME}-${MYSQLVERSION}"
           #docker rmi "${PROJECT_NAME}-${PHPVERSION}"
-          echo "{{ env.$PROJECT_NAME  }}-${{ var.HTTPDVERSION }}"
+          echo "{{ env.$PROJECT_NAME  }}-${{ vars.HTTPDVERSION }}"
           echo "${PROJECT_NAME}-${MYSQLVERSION}"
           echo "${PROJECT_NAME}-${PHPVERSION}"
           echo "=============hahaha=============="
