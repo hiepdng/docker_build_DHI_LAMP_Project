@@ -29,8 +29,8 @@ jobs:
       - name: Cleanup
         run: |
           # Stop and remove containers
-          docker stop lamp-httpd lamp-mysql lamp-php-fpm
-          docker rm lamp-httpd lamp-mysql lamp-php-fpm
+          #docker stop lamp-httpd lamp-mysql lamp-php-fpm
+          #docker rm lamp-httpd lamp-mysql lamp-php-fpm
           # Remove images
           docker rmi "${PROJECT_NAME}-${HTTPDVERSION}"
           docker rmi "${PROJECT_NAME}-${MYSQLVERSION}"
