@@ -35,6 +35,7 @@ jobs:
           echo "${PROJECT_NAME}-${HTTPDVERSION}"
           echo "${PROJECT_NAME}-${MYSQLVERSION}"
           echo "${PROJECT_NAME}-${PHPVERSION}"
+          echo "=============hahaha=============="
           # Remove docker network
           docker network ls --filter name=lamp_network -q |xargs -r docker network rm
 
