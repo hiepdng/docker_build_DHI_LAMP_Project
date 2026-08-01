@@ -1,8 +1,7 @@
 name: LAMP deploy on remote server via SSH
 
 on:
-  #push:
-  workflow_dispatch: 
+  push:
     branches:
       - main
 
@@ -23,12 +22,16 @@ jobs:
           script: |
             # Navigate to project directory on local machine
             cd /path/to/your/app
-            
+
+            # login to dhi.io
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login dhi.io -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            #echo "${{ secrets.DOCKER_PASSWORD }}" | docker login dhi.io --username "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
             # Pull latest changes from git
             git pull origin main
 
-            # setup
+            # Setup
             sh setup.sh
-            
+
             # Restart docker compose
             docker compose up -d --build --remove-orphans
