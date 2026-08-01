@@ -1,8 +1,14 @@
-## LAMP Project using Docker Hardened Images <br> &emsp; dhi.io/httpd – dhi.io/mysql – dhi.io/php
+## LAMP Project using Docker Hardened Images <br> &emsp; dhi.io/httpd – dhi.io/mysql – dhi.io/php  
+## with GitHub Actions
 
 
 ### Introduction:
-The LAMP stack project uses Docker Compose and hardened Docker images for high security. For testing, I enabled both unencrypted (port 80) and encrypted (port 443) traffic. To secure the web server, HTTPS must be enforced alongside other security configurations.
+- The LAMP stack project uses Docker Compose and hardened Docker images for high security. For testing, I enabled both unencrypted (port 80) and encrypted (port 443) traffic. To secure the web server, HTTPS must be enforced alongside other security configurations.
+- Github actions:
+  - Deploy LAMP on self-hosted runner (local machine)
+  - Deploy LAMP on a remover server via SSH
+  - Clean up docker containers/images on self-hosted runner
+  - Clean up docker containers/images on a remote server via SSH
 
 For demonstration, the following docker images are used: 
   - Apache image: [dhi.io/httpd:2.4.68-debian13](https://hub.docker.com/hardened-images/catalog/dhi/httpd)  
