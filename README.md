@@ -1,6 +1,6 @@
+
 ## <div align="center">$${\color{blue}Secure \space LAMP \space project \space deployment \space using \space Docker \space Hardened \space Images}$$
 ## <div align="center"> $${\color{blue}and \space automated \space GitHub \space Actions \space workflow}$$
-
 
 
 ### Introduction:
