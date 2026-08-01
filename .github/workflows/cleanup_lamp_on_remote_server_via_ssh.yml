@@ -1,0 +1,45 @@
+name: Clean up lamp to Local Machine
+
+on:
+  #push:
+  workflow_dispatch: 
+    branches:
+      - main  # Trigger on push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Load .env file variables
+        run: |
+          if [ -f .env ]; then
+            while IFS= read -r line || [ -n "$line" ]; do
+              # Skip comments and empty lines
+              [[ "$line" =~ ^#.*$ ]] || [ -z "$line" ] && continue
+              echo "$line" >> $GITHUB_ENV
+            done < .env
+          else
+            echo ".env file not found"
+          fi
+
+      - name: Cleanup
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Stop and remove containers
+            docker rm -f lamp-httpd lamp-mysql lamp-php-fpm  || true
+            # Remove images
+            docker rmi "${PROJECT_NAME}-${HTTPDVERSION}" || true
+            docker rmi "${PROJECT_NAME}-${MYSQLVERSION}" || true
+            docker rmi "${PROJECT_NAME}-${PHPVERSION}"  || true
+            # Remove docker network
+            docker network ls --filter name=lamp_network -q |xargs -r docker network rm
+
+        
