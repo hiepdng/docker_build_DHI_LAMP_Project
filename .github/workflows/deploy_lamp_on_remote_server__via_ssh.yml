@@ -1,7 +1,8 @@
 name:  Deploy lamp on a remote server via SSH
 
 on:
-  push:
+  #push:
+  workflow_dispatch: 
     branches:
       - main
 
