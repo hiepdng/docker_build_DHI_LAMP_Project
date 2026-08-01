@@ -1,4 +1,7 @@
-## <div align="center">Secure LAMP project deployment using Docker Hardened Images and automated GitHub Actions workflow
+## <div align="center">$${\color{blue}Secure \space LAMP \space project \space deployment \space using \space Docker \space Hardened \space Images}$$
+## <div align="center"> $${\color{blue}and \space automated \space GitHub \space Actions \space workflow}$$
+
+
 
 ### Introduction:
 - The LAMP stack project uses Docker Compose and hardened Docker images for high security. For testing, I enabled both unencrypted (port 80) and encrypted (port 443) traffic. To secure the web server, HTTPS must be enforced alongside other security configurations.
