@@ -7,7 +7,7 @@ on:
       - main  # Trigger on push to main branch
 
 jobs:
-  deploy:
+  cleanup:
     runs-on: self-hosted  # Executes directly on your local Linux machine
 
     steps:
@@ -26,7 +26,7 @@ jobs:
             echo ".env file not found"
           fi
 
-      - name: Cleanup
+      - name: Cleanup containers and images
         run: |
           # Stop and remove containers
           docker rm -f lamp-httpd lamp-mysql lamp-php-fpm  || true
