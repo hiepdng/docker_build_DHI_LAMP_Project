@@ -1,5 +1,4 @@
-## LAMP Project using Docker Hardened Images <br> &emsp; dhi.io/httpd – dhi.io/mysql – dhi.io/php  
-## with GitHub Actions
+## <div align="center">LAMP Project using Docker Hardened Images  <div align="center"> with GitHub Actions provided
 
 
 ### Introduction:
