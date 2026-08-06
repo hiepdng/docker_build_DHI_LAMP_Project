@@ -72,24 +72,32 @@ Files provided:
 
 <br/>
 
-### Setup
-- #### Download the repository
+### <ins>Method 1:</ins> Deploy LAMP Stack using CLI
+- **Download the repository**
 ```
 git clone https://github.com/hiepdng/docker_build_DHI_LAMP_Project.git
 ```
-
-- #### Configure/setup environment
+- **Login to dockerhub in your terminal**
+```
+docker login dhi.io
+```
+- **Configure/setup environment**
   - This will set up directories, create certificates and modify configuration files 
 ```
 cd docker_build_DHI_LAMP_Project
 sh setup.sh
 ```
-
-- #### Build httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers
+- **Build httpd, mysql, php-fpm images and Running httpd, mysql, php-fpm containers**
 ```
 docker compose build --no-cache
 docker compose up -d
 ```
+
+### <ins>Method 2:</ins> Deploy LAMP Stack using GitHub Actions
+- Set up your DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets in GitHub Actions.
+- You can deploy LAMP Stack either on Local Machine or on Remote Host. Both  are triggered by workflow_dispatch
+  - If you want to deploy LAMP Stack on a Remote Host, setup SERVER_HOST, SERVER_USER and SSH_PRIVATE_KEY secrets in GitHub Actions.
+- On GitHub Action, click "Run workflow" to deploy the LAMP Stack
 
 <br/><br/>
 
