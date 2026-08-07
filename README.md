@@ -96,8 +96,11 @@ docker compose up -d
 ### <ins>Method 2:</ins> Deploy LAMP Stack using GitHub Actions
 - Set up your DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets in GitHub Actions.
 - You can deploy LAMP Stack either on Local Machine or on Remote Host. Both  are triggered by workflow_dispatch
-  - If you want to deploy LAMP Stack on a Remote Host, setup SERVER_HOST, SERVER_USER and SSH_PRIVATE_KEY secrets in GitHub Actions.
-- On GitHub Action, click "Run workflow" to deploy the LAMP Stack
+  - If you deploy the LAMP Stack on a Remote Host, setup SERVER_HOST, SERVER_USER and SSH_PRIVATE_KEY secrets in GitHub Actions.
+  - If you deploy the LAMP stack on local machine (self-hosted runner), you need to register a Local Self-Hosted Runner:
+    - In your GitHub repo, go to Settings > Actions > Runners > New self-hosted runner.
+    - Download and configure the runner package on your local machine, then start it (./run.sh).
+- On GitHub Action, choose an action, then click "Run workflow" to deploy the LAMP Stack
 
 <br/><br/>
 
