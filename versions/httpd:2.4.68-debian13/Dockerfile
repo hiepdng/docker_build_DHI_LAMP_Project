@@ -22,9 +22,9 @@ COPY --from=builder /usr/local/share/ca-certificates/my-internal-ca.crt /usr/loc
 RUN update-ca-certificates
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
-USER 65532
 RUN mkdir -p /usr/local/apache2/conf/certs
 
+USER 65532
 EXPOSE 8080 443
 
 ENTRYPOINT ["httpd-foreground"]
