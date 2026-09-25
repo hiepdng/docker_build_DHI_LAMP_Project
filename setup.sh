@@ -50,11 +50,11 @@ sed -i \
 if [ ! -d "certs/mysql" ]; then
     echo "Create ${MYSQL_CERT_DIR} directory."
     mkdir -p  ${MYSQL_CERT_DIR}
-    chmod 777 ${MYSQL_CERT_DIR}
 fi
 if [ ! -d "mysql_data" ]; then
     echo "Create ${MYSQL_DATA_DIR} directory."
     mkdir -p ${MYSQL_DATA_DIR}
+    chmod 777 ${MYSQL_DATA_DIR}
 fi
 
 ## Create the Certificate Authority (CA): 
