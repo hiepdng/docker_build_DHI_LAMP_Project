@@ -117,6 +117,8 @@ mysql> CREATE USER 'root'@'172.1.0.4' IDENTIFIED BY 'my-secret-pw';  #create use
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.1.0.4';
 ```
 
+<br/><br/>
+
 ### Checking:
 To visit your page, to to https://localhost/index.php
 
