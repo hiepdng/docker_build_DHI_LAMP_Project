@@ -37,7 +37,7 @@ services:
       - "${HOST_MYSQL_PORT}:3306"
       - "${HOST_MYSQLX_PORT}:33060"
     environment:
-      - MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
     command: mysqld
     volumes:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql:rw
