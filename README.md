@@ -105,7 +105,8 @@ docker compose up -d
 <br/><br/>
 
 ### Modify database:
-Go inside MySQL container server and create user to connect to the database  
+In case the MySQL container initializes the root password properly,  
+go inside MySQL container server and create user to connect to the database  
 from PHP container server.  
 ```
 $ docker compose exec mysqld sh                                      #go inside mysql container os
