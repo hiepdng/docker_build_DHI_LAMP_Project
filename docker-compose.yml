@@ -41,6 +41,7 @@ services:
     command: mysqld
     volumes:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql:rw
+      - ${MYSQL_DATA_DIR}:/run/mysqld:rw
       - ${MYSQL_CERT_DIR}:/opt/mysql/certs:rw
       - ./etc/my.cnf:/etc/my.cnf
     networks:
