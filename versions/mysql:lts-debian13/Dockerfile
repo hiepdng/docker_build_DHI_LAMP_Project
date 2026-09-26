@@ -1,10 +1,12 @@
-FROM dhi.io/mysql:lts-debian13
+FROM dhi.io/mysql:lts-debian13-dev AS builder
 
 # Create certs directory
-USER 0
 RUN mkdir -p /opt/mysql/certs
 
-USER 65532
-EXPOSE 3306 33060 
+
+FROM dhi.io/mysql:lts-debian13
+COPY --from=builder /opt/mysql/certs /opt/mysql/certs
+
+EXPOSE 3306 33060
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
