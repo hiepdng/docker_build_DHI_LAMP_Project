@@ -54,7 +54,6 @@ fi
 if [ ! -d "mysql_data" ]; then
     echo "Create ${MYSQL_DATA_DIR} directory."
     mkdir -p ${MYSQL_DATA_DIR}
-    chmod 777 ${MYSQL_DATA_DIR}
 fi
 
 ## Create the Certificate Authority (CA): 
