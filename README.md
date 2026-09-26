@@ -104,6 +104,19 @@ docker compose up -d
 
 <br/><br/>
 
+### Modify database:
+Go inside MySQL container server and create user to connect to the database  
+from PHP container server.  
+```
+$ docker compose exec mysqld sh                                      #go inside mysql container os
+
+sh-5.2$ mysql -u root -h 127.0.0.1 -p                                #login mysql database
+mysql>
+
+mysql> CREATE USER 'root'@'172.1.0.4' IDENTIFIED BY 'my-secret-pw';  #create user and allow connection from php server
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.1.0.4';
+```
+
 ### Checking:
 To visit your page, to to https://localhost/index.php
 
