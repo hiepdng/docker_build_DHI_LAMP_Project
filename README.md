@@ -105,7 +105,7 @@ docker compose up -d
 <br/><br/>
 
 ### Modify database:
-In case the MySQL container initializes the root password properly,  
+In case the MySQL container does not initialize the root password properly,  
 go inside MySQL container server and create user to connect to the database  
 from PHP container server.  
 ```
